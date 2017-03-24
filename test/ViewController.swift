@@ -2,24 +2,21 @@
 //  ViewController.swift
 //  test
 //
-//  Created by Trong Cuong Doan on 3/24/17.
-//  Copyright © 2017 Trong Cuong Doan. All rights reserved.
-//
 
 import UIKit
 
 class ViewController: UIViewController {
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+  fileprivate var slideUpController: SlideUpViewController?
+  
+  @IBAction private func showButtonDidTouch() {
+    let contentView = ContentView(delegate: self)
+    self.slideUpController = SlideUpViewController(slideView: contentView)
+    self.slideUpController?.present(in: self)
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-
-
 }
 
+extension ViewController: ContentViewDelegate {
+  func dismissButtonDidTouch() {
+    self.slideUpController?.dismiss()
+  }
+}
