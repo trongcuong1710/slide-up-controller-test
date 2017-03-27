@@ -11,12 +11,24 @@ import UIKit
 final class SlideUpViewController: UIViewController {
   @IBOutlet fileprivate weak var backgroundView: UIView!
   fileprivate var slideView: UIView!
-  fileprivate var slideViewBottomConstraint: NSLayoutConstraint!
-  
-  init(slideView: UIView) {
+
+  private init() {
     super.init(nibName: "SlideUpViewController", bundle: Bundle.main)
-    self.slideView = slideView
     self.modalPresentationStyle = .overCurrentContext
+  }
+  
+  convenience init(slideView: UIView) {
+    self.init()
+    self.slideView = slideView
+
+  }
+
+  convenience init(viewController: UIViewController, preferredFrame: CGRect) {
+    self.init()
+    self.slideView = viewController.view
+    self.slideView.translatesAutoresizingMaskIntoConstraints = false
+    self.slideView.frame = preferredFrame
+    self.addChildViewController(viewController)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -39,32 +51,37 @@ final class SlideUpViewController: UIViewController {
     viewController.present(self, animated: false, completion: nil)
   }
   
-  func dismiss() {
+  func dismiss(completion: (() -> Void)? = nil ) {
     self.animateSlideViewOut { [unowned self] in
       self.dismiss(animated: false, completion: nil)
+      completion?()
     }
   }
 }
 
 extension SlideUpViewController {
   fileprivate func animateSlideViewIn(completion: (() -> ())? = nil) {
-    UIView.animate(withDuration: 0.3, animations: { [unowned self] in
+    UIView.animate(withDuration: 0.6,
+                   delay: 0.0,
+                   usingSpringWithDamping: 0.6,
+                   initialSpringVelocity: 0.0,
+                   options: .curveEaseIn,
+                   animations: { [unowned self] in
       self.backgroundView.alpha = 1
-//      self.slideView.transform = CGAffineTransform.identity
-      self.slideViewBottomConstraint.constant = 0
-      self.view.setNeedsLayout()
-      self.view.layoutIfNeeded()
+      self.slideView.center.y = self.slideView.center.y - self.slideView.frame.height
     })
   }
   
   fileprivate func animateSlideViewOut(completion: (() -> ())? = nil) {
-    UIView.animate(withDuration: 0.3, animations: { [unowned self] in
+    UIView.animate(withDuration: 0.3,
+                   delay: 0.0,
+                   usingSpringWithDamping: 1.0,
+                   initialSpringVelocity: 0.0,
+                   options: .curveEaseIn,
+                   animations: { [unowned self] in
       self.backgroundView.alpha = 0
-//      self.slideView.transform = CGAffineTransform(translationX: 0, y: self.slideView.frame.height)
-      self.slideViewBottomConstraint.constant = self.slideView.frame.height
-      self.view.setNeedsLayout()
-      self.view.layoutIfNeeded()
-    }) { (completed) in
+      self.slideView.center.y = self.slideView.center.y + self.slideView.frame.height
+    }) { (_) in
       completion?()
     }
   }
@@ -72,7 +89,6 @@ extension SlideUpViewController {
   fileprivate func setupSlideView() {
     self.addSlideViewToStack()
     self.setSlideViewContraints()
-//    self.slideView.transform = CGAffineTransform(translationX: 0, y: self.slideView.frame.height)
   }
   
   private func addSlideViewToStack() {
@@ -88,14 +104,14 @@ extension SlideUpViewController {
                                     multiplier: 1.0,
                                     constant: self.slideView.frame.height)
     
-    self.slideViewBottomConstraint = NSLayoutConstraint(item: self.slideView,
-                                                        attribute: .bottom,
-                                                        relatedBy: .equal,
-                                                        toItem: self.view,
-                                                        attribute: .bottom,
-                                                        multiplier: 1.0,
-                                                        constant: self.slideView.frame.height)
-    
+    let bottom = NSLayoutConstraint(item: self.slideView,
+                                    attribute: .bottom,
+                                    relatedBy: .equal,
+                                    toItem: self.view,
+                                    attribute: .bottom,
+                                    multiplier: 1.0,
+                                    constant: self.slideView.frame.height)
+
     let leading = NSLayoutConstraint(item: self.slideView,
                                      attribute: .leading,
                                      relatedBy: .equal,
@@ -112,9 +128,7 @@ extension SlideUpViewController {
                                       multiplier: 1.0,
                                       constant: 0.0)
     
-    
-    
     self.slideView.addConstraint(height)
-    self.view.addConstraints([self.slideViewBottomConstraint, leading, trailing])
+    self.view.addConstraints([bottom, leading, trailing])
   }
 }

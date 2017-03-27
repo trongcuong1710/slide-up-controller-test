@@ -28,11 +28,20 @@
                                     <action selector="showButtonDidTouch" destination="BYZ-38-t0r" eventType="touchUpInside" id="iGA-IR-SKR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bxs-E3-Ixr">
+                                <rect key="frame" x="132" y="368" width="110" height="30"/>
+                                <state key="normal" title="Show Controller"/>
+                                <connections>
+                                    <action selector="showControllerButtonDidTouchWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NFm-HM-mXK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Bxs-E3-Ixr" firstAttribute="top" secondItem="5qN-aO-GUy" secondAttribute="bottom" constant="20" id="B2E-NZ-OLT"/>
                             <constraint firstItem="5qN-aO-GUy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nyb-Ru-dbx"/>
                             <constraint firstItem="5qN-aO-GUy" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VnQ-CU-E67"/>
+                            <constraint firstItem="Bxs-E3-Ixr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lpK-r6-n8S"/>
                         </constraints>
                     </view>
                 </viewController>
