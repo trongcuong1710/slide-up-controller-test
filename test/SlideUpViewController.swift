@@ -50,14 +50,20 @@ extension SlideUpViewController {
   fileprivate func animateSlideViewIn(completion: (() -> ())? = nil) {
     UIView.animate(withDuration: 0.3, animations: { [unowned self] in
       self.backgroundView.alpha = 1
-      self.slideView.transform = CGAffineTransform.identity
+//      self.slideView.transform = CGAffineTransform.identity
+      self.slideViewBottomConstraint.constant = 0
+      self.view.setNeedsLayout()
+      self.view.layoutIfNeeded()
     })
   }
   
   fileprivate func animateSlideViewOut(completion: (() -> ())? = nil) {
     UIView.animate(withDuration: 0.3, animations: { [unowned self] in
       self.backgroundView.alpha = 0
-      self.slideView.transform = CGAffineTransform(translationX: 0, y: self.slideView.frame.height)
+//      self.slideView.transform = CGAffineTransform(translationX: 0, y: self.slideView.frame.height)
+      self.slideViewBottomConstraint.constant = self.slideView.frame.height
+      self.view.setNeedsLayout()
+      self.view.layoutIfNeeded()
     }) { (completed) in
       completion?()
     }
@@ -66,7 +72,7 @@ extension SlideUpViewController {
   fileprivate func setupSlideView() {
     self.addSlideViewToStack()
     self.setSlideViewContraints()
-    self.slideView.transform = CGAffineTransform(translationX: 0, y: self.slideView.frame.height)
+//    self.slideView.transform = CGAffineTransform(translationX: 0, y: self.slideView.frame.height)
   }
   
   private func addSlideViewToStack() {
@@ -88,7 +94,7 @@ extension SlideUpViewController {
                                                         toItem: self.view,
                                                         attribute: .bottom,
                                                         multiplier: 1.0,
-                                                        constant: 0)
+                                                        constant: self.slideView.frame.height)
     
     let leading = NSLayoutConstraint(item: self.slideView,
                                      attribute: .leading,
