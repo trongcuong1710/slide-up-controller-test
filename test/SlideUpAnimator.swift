@@ -54,7 +54,7 @@ class SlideUpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
       presentedView.alpha = 0
       animateView.center.y += animateView.frame.height
     }, completion: { (finished) in
-      presentedView.removeFromSuperview()
+//      presentedView.removeFromSuperview()
       context.completeTransition(finished)
     })
   }

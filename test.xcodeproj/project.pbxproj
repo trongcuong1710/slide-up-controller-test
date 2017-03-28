@@ -16,7 +16,6 @@
 		0DF362571E8517910051AC5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DF362561E8517910051AC5F /* Assets.xcassets */; };
 		0DF3625A1E8517910051AC5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF362581E8517910051AC5F /* LaunchScreen.storyboard */; };
 		0DF362631E8517BF0051AC5F /* SlideUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF362611E8517BF0051AC5F /* SlideUpViewController.swift */; };
-		0DF362641E8517BF0051AC5F /* SlideUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF362621E8517BF0051AC5F /* SlideUpViewController.xib */; };
 		0DF3626A1E851A700051AC5F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF362691E851A700051AC5F /* ContentView.swift */; };
 		0DF3626C1E851A7E0051AC5F /* ContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3626B1E851A7E0051AC5F /* ContentView.xib */; };
 /* End PBXBuildFile section */
@@ -33,7 +32,6 @@
 		0DF362591E8517910051AC5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DF3625B1E8517910051AC5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DF362611E8517BF0051AC5F /* SlideUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideUpViewController.swift; sourceTree = "<group>"; };
-		0DF362621E8517BF0051AC5F /* SlideUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideUpViewController.xib; sourceTree = "<group>"; };
 		0DF362691E851A700051AC5F /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0DF3626B1E851A7E0051AC5F /* ContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +73,6 @@
 				0DF362581E8517910051AC5F /* LaunchScreen.storyboard */,
 				0DF3625B1E8517910051AC5F /* Info.plist */,
 				0DF362611E8517BF0051AC5F /* SlideUpViewController.swift */,
-				0DF362621E8517BF0051AC5F /* SlideUpViewController.xib */,
 				0DF362691E851A700051AC5F /* ContentView.swift */,
 				0DF3626B1E851A7E0051AC5F /* ContentView.xib */,
 				0DC599851E88F39B00944C54 /* SelectViewController.swift */,
@@ -149,7 +146,6 @@
 				0DF362551E8517910051AC5F /* Main.storyboard in Resources */,
 				0DF3626C1E851A7E0051AC5F /* ContentView.xib in Resources */,
 				0DC599881E88F39B00944C54 /* SelectViewController.xib in Resources */,
-				0DF362641E8517BF0051AC5F /* SlideUpViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

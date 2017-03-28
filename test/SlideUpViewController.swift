@@ -15,7 +15,7 @@ final class SlideUpViewController: UIViewController {
   fileprivate var preferredHeight: CGFloat!
 
   private init() {
-    super.init(nibName: "SlideUpViewController", bundle: Bundle.main)
+    super.init(nibName: nil, bundle: nil)
     self.modalPresentationStyle = .overCurrentContext
     self.transitioningDelegate = self
   }
@@ -39,12 +39,19 @@ final class SlideUpViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
+    self.setupView()
     self.setupSlideView()
   }
 }
 
 extension SlideUpViewController {
+  fileprivate func setupView() {
+    self.view = UIView(frame: UIScreen.main.bounds)
+    self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+    self.view.alpha = 0
+  }
+
   fileprivate func setupSlideView() {
     self.setSlideViewFrame()
     self.addSlideViewToStack()
