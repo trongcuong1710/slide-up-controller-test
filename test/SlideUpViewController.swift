@@ -8,26 +8,28 @@
 
 import UIKit
 
+let kSlideViewTag = 231
+
 final class SlideUpViewController: UIViewController {
-  @IBOutlet fileprivate weak var backgroundView: UIView!
   fileprivate var slideView: UIView!
+  fileprivate var preferredHeight: CGFloat!
 
   private init() {
     super.init(nibName: "SlideUpViewController", bundle: Bundle.main)
     self.modalPresentationStyle = .overCurrentContext
+    self.transitioningDelegate = self
   }
   
-  convenience init(slideView: UIView) {
+  convenience init(slideView: UIView, preferredHeight: CGFloat = 340) {
     self.init()
+    self.preferredHeight = preferredHeight
     self.slideView = slideView
-
+    self.slideView.tag = kSlideViewTag
+    self.slideView.translatesAutoresizingMaskIntoConstraints = true
   }
 
-  convenience init(viewController: UIViewController, preferredFrame: CGRect) {
-    self.init()
-    self.slideView = viewController.view
-    self.slideView.translatesAutoresizingMaskIntoConstraints = false
-    self.slideView.frame = preferredFrame
+  convenience init(viewController: UIViewController, preferredHeight: CGFloat = 340) {
+    self.init(slideView: viewController.view, preferredHeight: preferredHeight)
     self.addChildViewController(viewController)
   }
   
@@ -40,95 +42,34 @@ final class SlideUpViewController: UIViewController {
     
     self.setupSlideView()
   }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    self.animateSlideViewIn()
-  }
-  
-  func present(in viewController: UIViewController) {
-    viewController.present(self, animated: false, completion: nil)
-  }
-  
-  func dismiss(completion: (() -> Void)? = nil ) {
-    self.animateSlideViewOut { [unowned self] in
-      self.dismiss(animated: false, completion: nil)
-      completion?()
-    }
-  }
 }
 
 extension SlideUpViewController {
-  fileprivate func animateSlideViewIn(completion: (() -> ())? = nil) {
-    UIView.animate(withDuration: 0.6,
-                   delay: 0.0,
-                   usingSpringWithDamping: 0.6,
-                   initialSpringVelocity: 0.0,
-                   options: .curveEaseIn,
-                   animations: { [unowned self] in
-      self.backgroundView.alpha = 1
-      self.slideView.center.y = self.slideView.center.y - self.slideView.frame.height
-    })
-  }
-  
-  fileprivate func animateSlideViewOut(completion: (() -> ())? = nil) {
-    UIView.animate(withDuration: 0.3,
-                   delay: 0.0,
-                   usingSpringWithDamping: 1.0,
-                   initialSpringVelocity: 0.0,
-                   options: .curveEaseIn,
-                   animations: { [unowned self] in
-      self.backgroundView.alpha = 0
-      self.slideView.center.y = self.slideView.center.y + self.slideView.frame.height
-    }) { (_) in
-      completion?()
-    }
-  }
-  
   fileprivate func setupSlideView() {
+    self.setSlideViewFrame()
     self.addSlideViewToStack()
-    self.setSlideViewContraints()
+  }
+
+  private func setSlideViewFrame() {
+    self.slideView.frame = CGRect(x: 0,
+                                  y: UIScreen.main.bounds.height,
+                                  width: UIScreen.main.bounds.width,
+                                  height: self.preferredHeight)
   }
   
   private func addSlideViewToStack() {
     self.view.addSubview(self.slideView)
   }
-  
-  private func setSlideViewContraints() {
-    let height = NSLayoutConstraint(item: self.slideView,
-                                    attribute: .height,
-                                    relatedBy: .equal,
-                                    toItem: nil,
-                                    attribute: .notAnAttribute,
-                                    multiplier: 1.0,
-                                    constant: self.slideView.frame.height)
-    
-    let bottom = NSLayoutConstraint(item: self.slideView,
-                                    attribute: .bottom,
-                                    relatedBy: .equal,
-                                    toItem: self.view,
-                                    attribute: .bottom,
-                                    multiplier: 1.0,
-                                    constant: self.slideView.frame.height)
+}
 
-    let leading = NSLayoutConstraint(item: self.slideView,
-                                     attribute: .leading,
-                                     relatedBy: .equal,
-                                     toItem: self.view,
-                                     attribute: .leading,
-                                     multiplier: 1.0,
-                                     constant: 0.0)
-    
-    let trailing = NSLayoutConstraint(item: self.slideView,
-                                      attribute: .trailing,
-                                      relatedBy: .equal,
-                                      toItem: self.view,
-                                      attribute: .trailing,
-                                      multiplier: 1.0,
-                                      constant: 0.0)
-    
-    self.slideView.addConstraint(height)
-    self.view.addConstraints([bottom, leading, trailing])
+extension SlideUpViewController: UIViewControllerTransitioningDelegate {
+  func animationController(forPresented presented: UIViewController,
+                           presenting: UIViewController,
+                           source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return SlideUpAnimator(isPresent: true)
+  }
+
+  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return SlideUpAnimator(isPresent: false)
   }
 }

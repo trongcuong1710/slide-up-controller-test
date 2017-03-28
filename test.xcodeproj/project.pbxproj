@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D7CCAC81E8A149B005595BC /* SlideUpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7CCAC71E8A149B005595BC /* SlideUpAnimator.swift */; };
 		0DC599871E88F39B00944C54 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC599851E88F39B00944C54 /* SelectViewController.swift */; };
 		0DC599881E88F39B00944C54 /* SelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DC599861E88F39B00944C54 /* SelectViewController.xib */; };
 		0DF362501E8517910051AC5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF3624F1E8517910051AC5F /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D7CCAC71E8A149B005595BC /* SlideUpAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideUpAnimator.swift; sourceTree = "<group>"; };
 		0DC599851E88F39B00944C54 /* SelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		0DC599861E88F39B00944C54 /* SelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectViewController.xib; sourceTree = "<group>"; };
 		0DF3624C1E8517910051AC5F /* test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,7 @@
 				0DF3626B1E851A7E0051AC5F /* ContentView.xib */,
 				0DC599851E88F39B00944C54 /* SelectViewController.swift */,
 				0DC599861E88F39B00944C54 /* SelectViewController.xib */,
+				0D7CCAC71E8A149B005595BC /* SlideUpAnimator.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				0DC599871E88F39B00944C54 /* SelectViewController.swift in Sources */,
 				0DF362631E8517BF0051AC5F /* SlideUpViewController.swift in Sources */,
 				0DF362521E8517910051AC5F /* ViewController.swift in Sources */,
+				0D7CCAC81E8A149B005595BC /* SlideUpAnimator.swift in Sources */,
 				0DF3626A1E851A700051AC5F /* ContentView.swift in Sources */,
 				0DF362501E8517910051AC5F /* AppDelegate.swift in Sources */,
 			);
